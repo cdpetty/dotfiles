@@ -6,13 +6,13 @@ alias cbashrc="cat ~/.bashrc"
 alias back="echo $OLDPWD ; cd $OLDPWD"
 alias c="clear"
 #colors
-DEFAULT="[37;40m"
-MAGENTA="[35;40m"
-GREEN="[32;40m"
-ORANGE="[33;40m"
-BLUE="[34;40m"
-CYAN="[36;40m"
-RED="[31;40m"
+DEFAULT="[37m"
+MAGENTA="[35m"
+GREEN="[32m"
+ORANGE="[33m"
+BLUE="[34m"
+CYAN="[36m"
+RED="[31m"
 
 #Custom prompt
 function Git_status (){
@@ -20,12 +20,12 @@ function Git_status (){
 	awk 'BEGIN {TOCOMMIT=0; TOADD=0} \
 	$1 == "??" { TOADD++ } \
 	$1 != "??" { TOCOMMIT++ } \
-	END { printf "\033[37;40m[ \033[31;40m?\033[37;40m"\
-    TOADD" \033[31;40m!\033[37;40m"TOCOMMIT" ]" }'
+	END { printf "\033[37m[ \033[31m?\033[37m"\
+    TOADD" \033[31m!\033[37m"TOCOMMIT" ]" }'
 }
 function Git_branch (){
 	BRANCH=$(git symbolic-ref -q HEAD 2> /dev/null) && \
-	echo -e "\033[37;40min \033${CYAN}${BRANCH##*/}$(Git_status) "
+	echo -e "\033[37min \033${CYAN}${BRANCH##*/}$(Git_status) "
 }
 
 export PS1='\[\e${MAGENTA}\]\u\[\e${DEFAULT}\]\
@@ -49,11 +49,11 @@ function gac() {
 	fi
 
 	#Add, commit, and push
-	echo -e "\033[36;40m------git add------\033[37;40m" &&
+	echo -e "\033[36m------git add------\033[37m" &&
 	git add . && 
-	echo -e "\n\033[36;40m------git commit------\033[37;40m" &&
+	echo -e "\n\033[36m------git commit------\033[37m" &&
 	git commit -m "$COMMIT" &&
-	echo -e "\n\033[36;40m------push------\033[37;40m" &&
+	echo -e "\n\033[36m------push------\033[37m" &&
 	git push origin master
 }
 
