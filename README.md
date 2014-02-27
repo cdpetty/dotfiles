@@ -9,3 +9,7 @@ git clone https://github.com/notyalc/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
 bash install.sh
+
+Recommended:
+
+source ~/.bashrc
