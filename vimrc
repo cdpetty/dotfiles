@@ -33,6 +33,8 @@ inoremap <right> <nop>
 " Key mappings
 nnoremap ; :
 nnoremap <leader><space> :noh<cr>
+inoremap syso<tab> system.out.println();<esc>hi
+inoremap cl<tab> console.log();<esc>hi
 
 " syntax highlighting
 syntax enable

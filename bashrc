@@ -1,10 +1,10 @@
 #Simple aliases
-alias ls="ls -FG"
-alias sbashrc="source ~/.bashrc"
-alias vbashrc="vim ~/.bashrc"
-alias cbashrc="cat ~/.bashrc"
-alias back="echo $OLDPWD ; cd $OLDPWD"
-alias c="clear"
+alias ls="ls -FG" #use specific ls options
+alias sbashrc="source ~/.bashrc" #re-source bashrc
+alias vbashrc="vim ~/.bashrc" #edit bashrc
+alias cbashrc="cat ~/.bashrc" #display bashrc
+alias p="fc -s" #run previous command
+
 #colors
 DEFAULT="[37m"
 MAGENTA="[35m"
@@ -88,10 +88,6 @@ function switch(){
 #cd & ls
 function cs () {
 	cd "$@" && ls
-}
-
-function p () {
-  !-1
 }
 
 #launch a new terminal
