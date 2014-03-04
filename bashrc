@@ -4,6 +4,9 @@ alias sbashrc="source ~/.bashrc" #re-source bashrc
 alias vbashrc="vim ~/.bashrc" #edit bashrc
 alias cbashrc="cat ~/.bashrc" #display bashrc
 alias p="fc -s" #run previous command
+alias brackets="open -a /Applications/Brackets.app $1"
+alias external="curl ipecho.net/plain; echo"
+alias ipconfig="ifconfig"
 
 #colors
 DEFAULT="[37m"
@@ -94,7 +97,7 @@ function cs () {
 function start () {
   osascript -e 'tell application "Terminal" to do script ""' | echo -e $1 \\c
 }
-#launch brackets
-function brackets () {
-	/Applications/Brackets.app/Contents/MacOS/./Brackets
+
+function cpr (){
+  g++ $1 && ./a.out
 }
