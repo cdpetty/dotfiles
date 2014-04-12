@@ -1,5 +1,5 @@
 #Simple aliases
-alias ls="ls -FG" #use specific ls options
+alias ls="ls -G" #use specific ls options
 alias sbashrc="source ~/.bashrc" #re-source bashrc
 alias vbashrc="vim ~/.bashrc" #edit bashrc
 alias cbashrc="cat ~/.bashrc" #display bashrc
@@ -7,7 +7,7 @@ alias p="fc -s" #run previous command
 alias brackets="open -a /Applications/Brackets.app $1"
 alias external="curl ipecho.net/plain; echo"
 alias ipconfig="ifconfig"
-
+alias one="python ~/Documents/Git/One/command/one.py $@"
 #colors
 DEFAULT="[37m"
 MAGENTA="[35m"
