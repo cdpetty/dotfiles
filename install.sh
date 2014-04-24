@@ -18,7 +18,13 @@ done="\033[31;40mDone\033[37;40m"
 #Error handling function
 set -e
 
-# create dorfiles_old in ~
+#Git stuff
+echo "Git submodule ${mv_color}init ${default_color}&& git submodule ${mv_color}update${default_color}... "
+git submodule init
+git submodule update
+echo -e "$done"
+
+# create dotfiles_old in ~
 echo -e "Creating ${old_color}$olddir ${default_color}for backup of any existing dotfiles in ~... "
 mkdir $olddir
 echo -e "$done"

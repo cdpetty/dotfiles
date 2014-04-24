@@ -1,13 +1,21 @@
 #Simple aliases
-alias ls="ls -G" #use specific ls options
+unamestr=`uname` #ls options by operating system
+if [[ "$unamestr" == "Linux" ]]; then
+  alias ls="ls --color"
+elif [[ "$unamestr" == "APPLE" ]]; then
+  alias ls="ls-G"
+fi
 alias sbashrc="source ~/.bashrc" #re-source bashrc
 alias vbashrc="vim ~/.bashrc" #edit bashrc
 alias cbashrc="cat ~/.bashrc" #display bashrc
 alias p="fc -s" #run previous command
-alias brackets="open -a /Applications/Brackets.app $1"
 alias external="curl ipecho.net/plain; echo"
 alias ipconfig="ifconfig"
 alias one="python ~/Documents/Git/One/command/one.py $@"
+
+#Exports
+export EDITOR=vim
+
 #colors
 DEFAULT="[37m"
 MAGENTA="[35m"
@@ -26,6 +34,7 @@ function Git_status (){
 	END { printf "\033[37m[ \033[31m?\033[37m"\
     TOADD" \033[31m!\033[37m"TOCOMMIT" ]" }'
 }
+
 function Git_branch (){
 	BRANCH=$(git symbolic-ref -q HEAD 2> /dev/null) && \
 	echo -e "\033[37min \033${CYAN}${BRANCH##*/}$(Git_status) "
@@ -38,6 +47,7 @@ export PS1='\[\e${MAGENTA}\]\u\[\e${DEFAULT}\]\
 
 ##Helpful functions##
 #Git Add, commit, and push
+
 function gac() {
 	if [ "$#" == 0 ]; then
 		echo "### No commit message supplied"
@@ -61,7 +71,7 @@ function gac() {
 }
 
 #Git commands
-for d in `find ~/Documents -not -path "*/\.*/\.git" -name ".git"`
+for d in `find ~ -not -path "*/\.*/\.git" -name ".git"`
 do 
     path=${d%/*}
     name=${path##*/}
@@ -95,7 +105,7 @@ function cs () {
 
 #launch a new terminal
 function start () {
-  osascript -e 'tell application "Terminal" to do script ""' | echo -e $1 \\c
+  gnome-terminal
 }
 
 function cpr (){
