@@ -11,7 +11,6 @@ alias cbashrc="cat ~/.bashrc" #display bashrc
 alias p="fc -s" #run previous command
 alias external="curl ipecho.net/plain; echo"
 alias ipconfig="ifconfig"
-alias one="python ~/Documents/Git/One/command/one.py $@"
 
 #Exports
 export EDITOR=vim
