@@ -65,7 +65,7 @@ function gac() {
 	echo -e "\033[36m------git add------\033[37m" &&
 	git add . && 
 	echo -e "\n\033[36m------git commit------\033[37m" &&
-	git commit -m "$COMMIT" &&
+	git commit -am "$COMMIT" &&
 	echo -e "\n\033[36m------push------\033[37m" &&
 	git push origin master
 }
