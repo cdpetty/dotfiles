@@ -30,14 +30,14 @@ mkdir $olddir
 echo -e "$done"
 
 #Create .bashrc_local for local bash configurations
-echo "Creating ~/.bashrc_local to store local bash configurations in... "
+echo -e "Creating ${new_color}~/.bashrc_local${default_color} to store local bash configurations in... "
 touch bashrc_local
-echo "$done"
+echo -e "$done"
 
 # change directory into dotfiles
 echo -e "Changing to ${new_color}$dir ${default_color}directory... "
 cd $dir
-echo -e "$done\n"
+echo -e "$done"
 
 # move old dotfiles into old_dotfiles directory AND create symlinks for new dotfiles directory
 for file in $files; do
