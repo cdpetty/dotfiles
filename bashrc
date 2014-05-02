@@ -15,7 +15,7 @@ alias one="python ~/Documents/Git/One/command/one.py $@"
 
 #Exports
 export EDITOR=vim
-
+source ~/.bashrc_local
 #colors
 DEFAULT="[37m"
 MAGENTA="[35m"
@@ -71,7 +71,7 @@ function gac() {
 }
 
 #Git commands
-for d in `find ~ -not -path "*/\.*/\.git" -name ".git"`
+for d in `find ~/Documents -not -path "*/\.*/\.git" -name ".git"`
 do 
     path=${d%/*}
     name=${path##*/}
