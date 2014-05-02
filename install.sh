@@ -8,18 +8,18 @@
 dir=~/dotfiles # directory for new dotfiles
 olddir=~/old_dotfiles # directory to move previous dot files
 files="bashrc vimrc vim bashrc_local" # dot files to be installed
-mv_color="\033[35;40m"
-ln_color="\033[34;40m"
-old_color="\033[33;40m"
-new_color="\033[32;40m"
-default_color="\033[37;40m"
-done="\033[31;40mDone\033[37;40m"
+mv_color="\033[35m"
+ln_color="\033[34m"
+old_color="\033[33m"
+new_color="\033[32m"
+default_color="\033[37m"
+done="\033[31mDone\033[37m"
 
 #Error handling function
 set -e
 
 #Git stuff
-echo "Git submodule ${mv_color}init ${default_color}&& git submodule ${mv_color}update${default_color}... "
+echo -e "Git submodule ${mv_color}init ${default_color}&& git submodule ${mv_color}update${default_color}... "
 git submodule init
 git submodule update
 echo -e "$done"
@@ -31,7 +31,7 @@ echo -e "$done"
 
 #Create .bashrc_local for local bash configurations
 echo "Creating ~/.bashrc_local to store local bash configurations in... "
-touch .bashrc_local
+touch bashrc_local
 echo "$done"
 
 # change directory into dotfiles
