@@ -58,7 +58,7 @@ done
 
 echo "Sourcing the new bashrc... "
 source ~/.bashrc
-echo "$done"
+echo -e "$done"
 
 
 trap "echo -e 'Finished. Symlinks to dotfiles configured. Old dotfiles located in directory: ${old_color}${olddir}'" EXIT
