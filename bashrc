@@ -2,8 +2,8 @@
 unamestr=`uname` #ls options by operating system
 if [[ "$unamestr" == "Linux" ]]; then
   alias ls="ls --color"
-elif [[ "$unamestr" == "APPLE" ]]; then
-  alias ls="ls-G"
+elif [[ "$unamestr" == "Darwin" ]]; then
+  alias ls="ls -G"
 fi
 alias sbashrc="source ~/.bashrc" #re-source bashrc
 alias vbashrc="vim ~/.bashrc" #edit bashrc
