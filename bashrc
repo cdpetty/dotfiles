@@ -11,10 +11,12 @@ alias cbashrc="cat ~/.bashrc" #display bashrc
 alias p="fc -s" #run previous command
 alias external="curl ipecho.net/plain; echo"
 alias ipconfig="ifconfig"
+alias bits="uname -m"
 
 #Exports
 export EDITOR=vim
 source ~/.bashrc_local
+
 #colors
 DEFAULT="[37m"
 MAGENTA="[35m"
