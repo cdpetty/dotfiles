@@ -12,6 +12,7 @@ alias p="fc -s" #run previous command
 alias external="curl ipecho.net/plain; echo"
 alias ipconfig="ifconfig"
 alias bits="uname -m"
+alias dir="ls -l"
 
 #Exports
 export EDITOR=vim
