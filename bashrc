@@ -13,6 +13,7 @@ alias external="curl ipecho.net/plain; echo"
 alias ipconfig="ifconfig"
 alias bits="uname -m"
 alias dir="ls -l"
+alias sl="ls $@ | rev"
 
 #Exports
 export EDITOR=vim
@@ -79,6 +80,20 @@ do
     name=${path##*/}
     alias $name="cd $d/..
     git status"
+done
+
+for x in {1..10}
+do
+  a="."
+  b="cd "
+  for y in $(seq 1 $x)
+  do
+    a=$a.
+    b=$b../
+  done
+  echo $a
+  echo $b
+  alias $a="$b"
 done
 
 #add something to path
