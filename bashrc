@@ -91,8 +91,6 @@ do
     a=$a.
     b=$b../
   done
-  echo $a
-  echo $b
   alias $a="$b"
 done
 
