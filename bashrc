@@ -74,7 +74,7 @@ function gac() {
 }
 
 #Git commands
-for d in `find ~/Documents -not -path "*/\.*/\.git" -name ".git"`
+for d in `find ~/Documents/Git -not -path "*/\.*/\.git" -name ".git"`
 do 
     path=${d%/*}
     name=${path##*/}
