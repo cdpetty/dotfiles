@@ -1,25 +1,30 @@
-#Simple aliases
-unamestr=`uname` #ls options by operating system
+# Simple aliases
+# ***Note: computer specific aliases should be included in bashrc_local 
+unamestr=`uname` # ls options by operating system
 if [[ "$unamestr" == "Linux" ]]; then
   alias ls="ls --color"
 elif [[ "$unamestr" == "Darwin" ]]; then
   alias ls="ls -G"
+  alias start="gnome-terminal"
 fi
-alias sbashrc="source ~/.bashrc" #re-source bashrc
-alias vbashrc="vim ~/.bashrc" #edit bashrc
-alias cbashrc="cat ~/.bashrc" #display bashrc
-alias p="fc -s" #run previous command
-alias external="curl ipecho.net/plain; echo"
-alias ipconfig="ifconfig"
-alias bits="uname -m"
-alias dir="ls -l"
-alias sl="ls $@ | rev"
+alias sbashrc="source ~/.bashrc" # re-source bashrc
+alias vbashrc="vim ~/.bashrc" # edit bashrc
+alias cbashrc="cat ~/.bashrc" # display bashrc
+alias p="fc -s" # run previous command
+alias external="curl ipecho.net/plain; echo" # get external ip address
+alias ipconfig="ifconfig" # Why is it not ipconfig in unix?
+alias bits="uname -m" # 32 or 64bit?
+alias dir="ls -l" # The windows struggle
+alias sl="ls $@ | rev" # LS games
 
-#Exports
+# Exports
 export EDITOR=vim
-source ~/.bashrc_local
+export PS1='\[\e${MAGENTA}\]\u\[\e${DEFAULT}\]\
+@\[\e${MAGENTA}\]\h\[\e${DEFAULT}\]: \
+\[\e${GREEN}\]\w \[\e${BLUE}$(Git_branch)\]\
+\[\e${DEFAULT}\]\n\$ '
 
-#colors
+# Colors
 DEFAULT="[37m"
 MAGENTA="[35m"
 GREEN="[32m"
@@ -28,30 +33,27 @@ BLUE="[34m"
 CYAN="[36m"
 RED="[31m"
 
-#Custom prompt
+###### Custom prompt ###### 
+#  Get current staged and unstaged commit
 function Git_status (){
 	git status --porcelain | \
 	awk 'BEGIN {TOCOMMIT=0; TOADD=0} \
-	$1 == "??" { TOADD++ } \
-	$1 != "??" { TOCOMMIT++ } \
+  ($1 == "??") { TOADD++ } \
+  ($1 != "??") { TOCOMMIT++ } \
 	END { printf "\033[37m[ \033[31m?\033[37m"\
     TOADD" \033[31m!\033[37m"TOCOMMIT" ]" }'
 }
 
+# Get current git branch
 function Git_branch (){
 	BRANCH=$(git symbolic-ref -q HEAD 2> /dev/null) && \
-	echo -e "\033[37min \033${CYAN}${BRANCH##*/}$(Git_status) "
+	echo -e "\033[37min \033${CYAN}${BRANCH##*heads/}$(Git_status) "
 }
 
-export PS1='\[\e${MAGENTA}\]\u\[\e${DEFAULT}\]\
-@\[\e${MAGENTA}\]\h\[\e${DEFAULT}\]: \
-\[\e${GREEN}\]\w \[\e${BLUE}$(Git_branch)\]\
-\[\e${DEFAULT}\]\n\$ '
-
-##Helpful functions##
-#Git Add, commit, and push
-
+## Helpful functions ##
+# Git Add, commit, and push
 function gac() {
+  # Get the commit message, no need to put message in quotes
 	if [ "$#" == 0 ]; then
 		echo "### No commit message supplied"
 		echo -e "### Type commit message > \\c"
@@ -64,41 +66,50 @@ function gac() {
 		COMMIT="$*"
 	fi
 
-	#Add, commit, and push
+	# Add, commit, and push
 	echo -e "\033[36m------git add------\033[37m" &&
 	git add . && 
 	echo -e "\n\033[36m------git commit------\033[37m" &&
-	git commit -am "$COMMIT" &&
+	git commit -m "$COMMIT" &&
 	echo -e "\n\033[36m------push------\033[37m" &&
-	git push origin master
+	git push
 }
 
-#Git commands
-for d in `find ~/Documents/Git -not -path "*/\.*/\.git" -name ".git"`
-do 
+# Git commands
+function git_commands(){
+  for d in `find ~/Documents/Git -not -path "*/\.*/\.git" -name ".git"`
+  do 
     path=${d%/*}
     name=${path##*/}
-    alias $name="cd $d/..
-    git status"
-done
-
-for x in {1..10}
-do
-  a="."
-  b="cd "
-  for y in $(seq 1 $x)
-  do
-    a=$a.
-    b=$b../
+    alias $name="cd $d/.. \
+      git status"
   done
-  alias $a="$b"
-done
+}
+git_commands
 
-#add something to path
+# Easier way to go back a directory
+# .. = back one directory, ... = back two directories, etc to 10 possible directories
+function dot_commands(){
+  for x in {1..10}
+  do
+    a="."
+    b="cd "
+    for y in $(seq 1 $x)
+    do
+      a=$a.
+      b=$b../
+    done
+    alias $a="$b"
+  done
+}
+dot_commands
+
+# add something to path
 function path (){
-	export PATH="$path:$1"
+	export PATH="$PATH:$1"
 }
 
+# Handy function to easily switch between two directories
 function switch(){
   if [ "$#" == 2 ]; then 
     export SWITCHPATHS="${1} ${2}"
@@ -110,19 +121,21 @@ function switch(){
       cd $PA
     elif [ "$PA" == "$PWD" ]; then
       cd $P 
+    else 
+      cd $P
     fi
   fi
 }
-#cd & ls
+
+# cd & ls
 function cs () {
 	cd "$@" && ls
-}
-
-#launch a new terminal
-function start () {
-  gnome-terminal
 }
 
 function cpr (){
   g++ $1 && ./a.out
 }
+
+# Local bash commands should be stored here
+source ~/.bashrc_local 
+
