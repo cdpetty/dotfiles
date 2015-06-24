@@ -35,19 +35,27 @@ RED="[31m"
 
 ###### Custom prompt ###### 
 #  Get current staged and unstaged commit
+#function Git_status (){
+#	git status --porcelain | \
+#	awk 'BEGIN {TOCOMMIT=0; TOADD=0} \
+#  ($1 == "??") { TOADD++ } \
+#  ($1 != "??") { TOCOMMIT++ } \
+#	END { printf "\033[37m[ \033[31m?\033[37m"\
+#    TOADD" \033[31m!\033[37m"TOCOMMIT" ]" }'
+#}
 function Git_status (){
 	git status --porcelain | \
-	awk 'BEGIN {TOCOMMIT=0; TOADD=0} \
-  ($1 == "??") { TOADD++ } \
-  ($1 != "??") { TOCOMMIT++ } \
-	END { printf "\033[37m[ \033[31m?\033[37m"\
-    TOADD" \033[31m!\033[37m"TOCOMMIT" ]" }'
+	awk 'BEGIN {TOCOMMIT=0; TOMOD=0; TOADD=0} \
+  { if ($1 == "??") { TOADD++ } \
+  else if ($1 == "A") { TOCOMMIT++ } \
+  else { TOMOD++ }} \
+	END { printf "\033[37m[ \033[31m?\033[37m%s \033[31m%%\033[37m%s \033[31m!\033[37m%s ]", TOADD, TOMOD, TOCOMMIT }'
 }
 
 # Get current git branch
 function Git_branch (){
 	BRANCH=$(git symbolic-ref -q HEAD 2> /dev/null) && \
-	echo -e "\033[37min \033${CYAN}${BRANCH##*heads/}$(Git_status) "
+	echo -e "\033[37min \033${CYAN}${BRANCH#*heads/}$(Git_status) "
 }
 
 ## Helpful functions ##
@@ -77,7 +85,7 @@ function gac() {
 
 # Git commands
 function git_commands(){
-  for d in `find ~/Documents/Git -not -path "*/\.*/\.git" -name ".git"`
+  for d in `find ~/Documents/HomeAway -not -path "*/\.*/\.git" -name ".git"`
   do 
     path=${d%/*}
     name=${path##*/}
