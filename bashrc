@@ -3,9 +3,10 @@
 unamestr=`uname` # ls options by operating system
 if [[ "$unamestr" == "Linux" ]]; then
   alias ls="ls --color"
+  alias start="gnome-terminal"
 elif [[ "$unamestr" == "Darwin" ]]; then
   alias ls="ls -G"
-  alias start="gnome-terminal"
+  alias start='open -a Terminal "`pwd`"'
 fi
 alias sbashrc="source ~/.bashrc" # re-source bashrc
 alias vbashrc="vim ~/.bashrc" # edit bashrc
@@ -33,16 +34,6 @@ BLUE="[34m"
 CYAN="[36m"
 RED="[31m"
 
-###### Custom prompt ###### 
-#  Get current staged and unstaged commit
-#function Git_status (){
-#	git status --porcelain | \
-#	awk 'BEGIN {TOCOMMIT=0; TOADD=0} \
-#  ($1 == "??") { TOADD++ } \
-#  ($1 != "??") { TOCOMMIT++ } \
-#	END { printf "\033[37m[ \033[31m?\033[37m"\
-#    TOADD" \033[31m!\033[37m"TOCOMMIT" ]" }'
-#}
 function Git_status (){
 	git status --porcelain | \
 	awk 'BEGIN {TOCOMMIT=0; TOMOD=0; TOADD=0} \
@@ -85,7 +76,7 @@ function gac() {
 
 # Git commands
 function git_commands(){
-  for d in `find ~/Documents/HomeAway -not -path "*/\.*/\.git" -name ".git"`
+  for d in `find ~/Documents/Git -not -path "*/\.*/\.git" -name ".git"`
   do 
     path=${d%/*}
     name=${path##*/}
@@ -124,7 +115,7 @@ function switch(){
   else
     P=${SWITCHPATHS%% *}
     PA=${SWITCHPATHS##* }
-    echo "P: $P, PA: $PA"
+    # echo "P: $P, PA: $PA"
     if [ "$P" == "$PWD" ]; then
       cd $PA
     elif [ "$PA" == "$PWD" ]; then
@@ -134,6 +125,20 @@ function switch(){
     fi
   fi
 }
+
+# Easily save a directory path for use in a nother terminal
+function epwd(){
+    if [ "$1" == "set" ]; then 
+        working_dir=$(pwd)
+        echo "Set epwd to $working_dir"
+        export epwd="${working_dir}"
+    elif [ "$1" == "get" ]; then
+        echo $epwd
+    else
+        cd $epwd
+    fi
+}
+
 
 # cd & ls
 function cs () {
