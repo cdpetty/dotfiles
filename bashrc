@@ -6,7 +6,7 @@ if [[ "$unamestr" == "Linux" ]]; then
   alias start="gnome-terminal"
 elif [[ "$unamestr" == "Darwin" ]]; then
   alias ls="ls -G"
-  alias start='open -a Terminal "`pwd`"'
+  alias start='open -a Terminal "`pwd`"' # Open a new terminal in same directory
 fi
 alias sbashrc="source ~/.bashrc" # re-source bashrc
 alias vbashrc="vim ~/.bashrc" # edit bashrc
