@@ -37,10 +37,10 @@ RED="[31m"
 function Git_status (){
 	git status --porcelain | \
 	awk 'BEGIN {TOCOMMIT=0; TOMOD=0; TOADD=0} \
-  { if ($1 == "??") { TOADD++ } \
-  else if ($1 == "A") { TOCOMMIT++ } \
-  else { TOMOD++ }} \
-	END { printf "\033[37m[ \033[31m?\033[37m%s \033[31m%%\033[37m%s \033[31m!\033[37m%s ]", TOADD, TOMOD, TOCOMMIT }'
+        { if ($1 == "??") { TOADD++ } \
+        else if ($1 == "A") { TOCOMMIT++ } \
+        else { TOMOD++ }} \
+        END { printf "\033[37m[ \033[31m?\033[37m%s \033[31m%%\033[37m%s \033[31m!\033[37m%s ]", TOADD, TOMOD, TOCOMMIT }'
 }
 
 # Get current git branch
