@@ -2,10 +2,10 @@
 # ***Note: computer specific aliases should be included in bashrc_local 
 unamestr=`uname` # ls options by operating system
 if [[ "$unamestr" == "Linux" ]]; then
-  alias ls="ls --color"
+  alias ls="ls --color" # Color ls
   alias start="gnome-terminal"
 elif [[ "$unamestr" == "Darwin" ]]; then
-  alias ls="ls -G"
+  alias ls="ls -G" # Color ls
   alias start='open -a Terminal "`pwd`"' # Open a new terminal in same directory
 fi
 alias sbashrc="source ~/.bashrc" # re-source bashrc
