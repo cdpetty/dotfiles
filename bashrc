@@ -127,16 +127,18 @@ function switch(){
 }
 
 # Easily save a directory path for use in a nother terminal
-function epwd(){
-    if [ "$1" == "set" ]; then 
-        working_dir=$(pwd)
-        echo "Set epwd to $working_dir"
-        export epwd="${working_dir}"
-    elif [ "$1" == "get" ]; then
-        echo $epwd
-    else
-        cd $epwd
-    fi
+function spwd(){
+    working_dir=$(pwd)
+    echo "Set epwd to $working_dir"
+    export epwd="${working_dir}"
+}
+
+function gpwd(){
+    cd $epwd
+}
+
+function lpwd(){
+    echo $epwd
 }
 
 
