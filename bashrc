@@ -84,6 +84,7 @@ function git_commands(){
       git status"
   done
 }
+# eval `git_commands &` &> /dev/null
 git_commands
 
 # Easier way to go back a directory

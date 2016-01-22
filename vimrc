@@ -30,10 +30,16 @@ au FocusLost * :wa
 " inoremap <left> <nop>
 " inoremap <right> <nop>
 
+" Scroll up 
+nnoremap <up> Hkkkkk
+nnoremap <down> Ljjjjj
+inoremap <up> Hkkkkk
+inoremap <down> Ljjjjj
+
 " Key mappings
 nnoremap ; :
 nnoremap <leader><space> :noh<cr>
-inoremap syso<tab> system.out.println();<esc>hi
+inoremap syso<tab> System.out.println();<esc>hi
 inoremap cl<tab> console.log();<esc>hi
 
 " syntax highlighting
