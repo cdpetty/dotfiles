@@ -1,3 +1,4 @@
+
 # Simple aliases
 # ***Note: computer specific aliases should be included in bashrc_local 
 unamestr=`uname` # ls options by operating system
@@ -17,6 +18,9 @@ alias ipconfig="ifconfig" # Why is it not ipconfig in unix?
 alias bits="uname -m" # 32 or 64bit?
 alias dir="ls -l" # The windows struggle
 alias sl="ls $@ | rev" # LS games
+alias remote="git config --get remote.origin.url"
+alias comp="rm a.out ; g++ -std=c++11 *.cpp"
+alias rm="rm -i"
 
 # Exports
 export EDITOR=vim
@@ -24,6 +28,7 @@ export PS1='\[\e${MAGENTA}\]\u\[\e${DEFAULT}\]\
 @\[\e${MAGENTA}\]\h\[\e${DEFAULT}\]: \
 \[\e${GREEN}\]\w \[\e${BLUE}$(Git_branch)\]\
 \[\e${DEFAULT}\]\n\$ '
+export PATH="$PATH:~/dotfiles/bin"
 
 # Colors
 DEFAULT="[37m"
@@ -85,7 +90,7 @@ function git_commands(){
   done
 }
 # eval `git_commands &` &> /dev/null
-git_commands
+#git_commands
 
 # Easier way to go back a directory
 # .. = back one directory, ... = back two directories, etc to 10 possible directories
@@ -155,3 +160,7 @@ function cpr (){
 # Local bash commands should be stored here
 source ~/.bashrc_local 
 
+function tp (){
+    NEW_DIR=$(teleprt $@)
+    cd $NEW_DIR
+}
