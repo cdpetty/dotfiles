@@ -4,7 +4,7 @@ My dotfiles.
 
 Install instructions:
 
-git clone https://github.com/notyalc/dotfiles.git ~/dotfiles
+git clone https://github.com/cdpetty/dotfiles.git ~/dotfiles
 
 cd ~/dotfiles
 
