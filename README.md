@@ -12,4 +12,4 @@ cd ~/dotfiles
 
 Recommended:
 
-source ~/.bashrc
+source ~/.zshrc
